@@ -3,58 +3,92 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#153f32">
-    <meta name="description" content="Explore sample court availability and non-member booking windows at Nota Club, Toronto.">
-    <title>Nota Club | Find your court</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23174b39'/%3E%3Cpath d='M9 23V10h4v2c5-5 10-1 10 3v8h-4v-8c0-3-6-3-6 1v7z' fill='%23dfed8b'/%3E%3C/svg%3E">
+    <meta name="theme-color" content="#1d4a81">
+    <meta name="description" content="Court availability for non-members at North York Winter Tennis Club, Toronto.">
+    <title>Court Availability | North York Winter Tennis Club</title>
+    <link rel="icon" href="/logo.png">
     <link rel="stylesheet" href="/styles.css">
     <script type="module" src="/app.js"></script>
   </head>
   <body>
+    <div class="top-bar">
+      <div class="container">
+        <a href="mailto:membership@nywintertennisclub.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2zM3 6l9 7 9-7"/></svg>Email: membership@nywintertennisclub.com</a>
+        <a href="tel:+14164960225"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a3 3 0 0 1-3 3A19 19 0 0 1 3 5a3 3 0 0 1 3-3z"/></svg>Phone: (416) 496-0225</a>
+      </div>
+    </div>
+
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Nota Club home"><span class="brand-mark" aria-hidden="true">n<span>.</span></span><span>NOTA<span class="brand-small">CLUB / TORONTO</span></span></a>
-      <nav aria-label="Main"><a class="nav-active" href="#availability">Court availability</a><a href="#booking-guide">Non-member guide <span aria-hidden="true">&#8599;</span></a></nav>
-      <span class="guest-badge"><span aria-hidden="true">&#9675;</span> Non-member access</span>
+      <div class="container header-inner">
+        <a class="logo" href="https://www.nywintertennisclub.com"><img src="/logo.png" alt="North York Winter Tennis Club" width="91" height="80"></a>
+        <nav aria-label="Main">
+          <a href="https://www.nywintertennisclub.com">Club <span aria-hidden="true">&#8964;</span></a>
+          <a class="active" href="#availability" aria-current="page">Court Availability</a>
+          <a href="https://www.nywintertennisclub.com">Join the Waitlist</a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="small-line"></span> A LITTLE MORE TIME ON COURT</div>
-          <h1 id="page-title">Your next match<br>starts <em>here.</em></h1>
-          <p>Find an open court. Make time to play.<br>Explore court availability for non-members at Nota Club.</p>
-          <a class="hero-link" href="#availability">Find a court <span aria-hidden="true">&#8600;</span></a>
-        </div>
-        <div class="court-art" aria-hidden="true">
-          <div class="art-caption">THE COURT IS CALLING.</div>
-          <div class="tennis-court"><div class="court-inner"></div><div class="court-net"></div><div class="service-line"></div><div class="center-line"></div></div>
-          <div class="tennis-ball"></div><div class="art-number">01 / LET'S PLAY</div>
-        </div>
-      </section>
+    <section class="page-title" aria-labelledby="page-title">
+      <div class="container">
+        <h1 id="page-title">Court Availability</h1>
+        <p>Open courts for non-members &middot; All times in Toronto local time</p>
+      </div>
+    </section>
 
-      <div class="demo-notice"><span class="demo-icon" aria-hidden="true">i</span><p><strong>A preview of your next game.</strong> You’re viewing sample availability, not live Chelsea data. Court names and hours are illustrative. No bookings can be made here.</p><span class="demo-pill">DEMO MODE</span></div>
+    <section id="booking-guide" class="rules-strip" aria-label="Non-member booking windows">
+      <div class="rule">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="31" rx="3"/><path d="M7 19h34M16 6v8M32 6v8M15 27h4M22 27h4M29 27h4M15 33h4M22 33h4"/></svg>
+        <div><h2>Weekday Non-Prime</h2><p>Mon–Fri outside 6–10 pm<br>Book up to <strong>5 days</strong> in advance</p></div>
+      </div>
+      <div class="rule">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M24 13v11l7 5"/></svg>
+        <div><h2>Weekday Prime Time</h2><p>Mon–Fri, 6–10 pm<br>Book <strong>same day</strong> only</p></div>
+      </div>
+      <div class="rule">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><path d="M10 14c8 4 8 16 0 20M38 14c-8 4-8 16 0 20"/></svg>
+        <div><h2>Weekends</h2><p>Sat &amp; Sun, all hours<br>Book <strong>1 day</strong> in advance</p></div>
+      </div>
+    </section>
 
-      <section id="availability" class="availability" aria-labelledby="availability-title">
-        <div class="section-top"><div><div class="eyebrow muted">MAKE ROOM FOR A MATCH</div><h2 id="availability-title">Find your court</h2></div><div class="timezone"><span aria-hidden="true">&#9678;</span> Toronto local time <span id="clock"></span></div></div>
-        <div class="date-heading"><h3 id="date-range"></h3><span>Today + the next 6 days</span></div>
-        <div id="dates" class="dates" role="group" aria-label="Choose a date"></div>
-        <div class="filters">
-          <div class="filter-fields"><label>Court<select id="court-filter"><option value="all">All courts</option></select></label><label>Time of day<select id="time-filter"><option value="all">Any time</option><option value="morning">Morning · before noon</option><option value="afternoon">Afternoon · noon–6 pm</option><option value="evening">Evening · from 6 pm</option></select></label></div>
-          <label class="toggle-label"><input id="eligible-filter" type="checkbox" checked><span class="switch" aria-hidden="true"></span> Available to me only</label>
-        </div>
-        <div class="results-heading"><div><h3 id="selected-heading"></h3><p id="results-summary" role="status" aria-live="polite"></p></div><button id="refresh" class="refresh-button" type="button"><span aria-hidden="true">&#8635;</span> Refresh sample</button></div>
-        <div class="legend"><span><i class="dot available-dot"></i> Available to non-members</span><span><i class="dot locked-dot"></i> Outside booking window</span><span><i class="dot reserved-dot"></i> Unavailable</span></div>
-        <div id="results" class="results" aria-busy="false"></div>
-        <p class="availability-footnote">Availability only, not a reservation. Rates and booking instructions will be added later.</p>
-      </section>
+    <main class="content">
+      <div class="container">
+        <p class="notice"><strong>Preview:</strong> showing sample availability, not live club data. Court names and hours are illustrative. Bookings can’t be completed until the club’s Chelsea system is connected.</p>
 
-      <section id="booking-guide" class="guide" aria-labelledby="guide-title">
-        <div class="guide-heading"><div class="eyebrow muted">GOOD TO KNOW</div><h2 id="guide-title">A court for you.<br>A few simple rules.</h2><p>Non-member booking windows, at a glance.<br>All times are local to Toronto.</p></div>
-        <div class="rule"><span class="rule-number">01</span><h3>Weekday non-prime</h3><p>Monday–Friday, outside 6–10 pm</p><div class="rule-time">5 days <span>in advance</span></div></div>
-        <div class="rule"><span class="rule-number">02</span><h3>Weekday prime time</h3><p>Monday–Friday, 6–10 pm</p><div class="rule-time">Same day <span>only</span></div></div>
-        <div class="rule"><span class="rule-number">03</span><h3>Weekend play</h3><p>Saturday &amp; Sunday, all hours</p><div class="rule-time">1 day <span>in advance</span></div></div>
-      </section>
+        <section id="availability" class="panel" aria-labelledby="availability-title">
+          <div class="panel-header">
+            <h2 id="availability-title">Find an Available Court</h2>
+            <span class="clock">Toronto time: <strong id="clock"></strong></span>
+          </div>
+
+          <div class="date-heading"><h3 id="date-range"></h3><span>Today and the next 6 days</span></div>
+          <div id="dates" class="dates" role="group" aria-label="Choose a date"></div>
+
+          <div class="filters">
+            <label>Court<select id="court-filter"><option value="all">All courts</option></select></label>
+            <label>Time of day<select id="time-filter"><option value="all">Any time</option><option value="morning">Morning (before noon)</option><option value="afternoon">Afternoon (noon–6 pm)</option><option value="evening">Evening (from 6 pm)</option></select></label>
+            <label class="checkbox"><input id="eligible-filter" type="checkbox" checked> Show only courts I can book</label>
+          </div>
+
+          <div class="results-heading">
+            <div><h3 id="selected-heading"></h3><p id="results-summary" role="status" aria-live="polite"></p></div>
+            <button id="refresh" class="button" type="button">Refresh</button>
+          </div>
+          <div class="legend"><span><i class="dot available-dot"></i>Available to non-members</span><span><i class="dot locked-dot"></i>Outside booking window</span><span><i class="dot reserved-dot"></i>Unavailable</span></div>
+          <div id="results" class="results" aria-busy="false"></div>
+          <p class="footnote">Select an available court to book it. Rates will be added later.</p>
+        </section>
+      </div>
     </main>
-    <footer><span class="footer-brand">NOTA CLUB<span>More time for the game.</span></span><span>Non-member court availability <span class="footer-dot">/</span> Toronto, Ontario</span></footer>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div><img src="/logo.png" alt="" width="91" height="80"><p>North York Winter Tennis.</p></div>
+        <div><h2>Useful Links</h2><ul><li><a href="https://www.nywintertennisclub.com">North Bubble - Head Office</a></li><li><a href="https://www.nywintertennisclub.com">South Bubble</a></li><li><a href="https://www.nywintertennisclub.com">East Bubble</a></li><li><a href="https://www.nywintertennisclub.com">Club Calendar</a></li></ul></div>
+        <div><h2>Club Hours</h2><p>North Bubble 2975 Don Mills Rd West<br>7am to midnight 7 days a week.</p><p>East Bubble 230 Cassandra Blvd<br>7am to 11pm 7 days a week.</p></div>
+        <div><h2>Contact Us</h2><address>P.O. Box 896 Station B<br>Willowdale, Ontario<br>M2K 2R1<br>Phone: <a href="tel:+14164960225">(416) 496-0225</a><br>Email: <a class="red-link" href="mailto:membership@nywintertennisclub.com">membership@nywintertennisclub.com</a></address></div>
+      </div>
+      <div class="copyright">North York Winter Tennis &copy; All Rights Reserved.</div>
+    </footer>
   </body>
 </html>

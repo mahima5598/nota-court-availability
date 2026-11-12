@@ -54,3 +54,26 @@ test('calendar arithmetic remains stable across DST and year boundaries', () => 
   assert.deepEqual(clubClock(new Date('2026-03-08T07:00:00Z')), { date: '2026-03-08', minutes: 180 });
   assert.equal(eligibility(slot('2026-03-11'), new Date('2026-03-06T14:00:00Z')).eligible, true);
 });
+
+import { validateBooking } from './booking.js';
+
+const bookingSlots = [
+  { date: '2026-11-09', courtId: 'court-1', start: 600, end: 660, available: true },
+  { date: '2026-11-09', courtId: 'court-2', start: 600, end: 660, available: false },
+  { date: '2026-11-10', courtId: 'court-1', start: 1080, end: 1140, available: true },
+];
+const details = { name: 'Alex Player', email: 'alex@example.com', phone: '(416) 555-0123' };
+
+test('booking accepts valid details for an eligible available slot', () => {
+  const result = validateBooking({ ...details, date: '2026-11-09', courtId: 'court-1', start: '600' }, bookingSlots, monday);
+  assert.deepEqual(result.errors, {});
+  assert.equal(result.slot, bookingSlots[0]);
+});
+
+test('booking rejects invalid details and unbookable slots', () => {
+  const invalid = validateBooking({ name: 'A', email: 'nope', phone: '123', date: '2026-11-09', courtId: 'court-1', start: 600 }, bookingSlots, monday);
+  assert.deepEqual(Object.keys(invalid.errors).sort(), ['email', 'name', 'phone']);
+  assert.match(validateBooking({ ...details, date: '2026-11-09', courtId: 'court-2', start: 600 }, bookingSlots, monday).errors.slot, /no longer available/);
+  assert.match(validateBooking({ ...details, date: '2026-11-10', courtId: 'court-1', start: 1080 }, bookingSlots, monday).errors.slot, /outside/);
+  assert.match(validateBooking({ ...details, date: '2026-11-09', courtId: 'court-9', start: 600 }, bookingSlots, monday).errors.slot, /could not be found/);
+});

@@ -64,9 +64,13 @@ function renderResults() {
     for (const slot of filtered.filter((item) => item.start === hour)) {
       const rule = eligibility(slot, now);
       const status = !slot.available ? 'reserved' : rule.eligible ? 'available' : 'locked';
-      const card = document.createElement('article');
-      card.className = `slot-card ${status}`;
       const court = courts.find((item) => item.id === slot.courtId);
+      const card = document.createElement(status === 'available' ? 'a' : 'article');
+      card.className = `slot-card ${status}`;
+      if (status === 'available') {
+        card.href = `/book?${new URLSearchParams({ date: slot.date, court: slot.courtId, start: slot.start })}`;
+        card.setAttribute('aria-label', `Book ${court.name} at ${timeLabel(slot.start)}`);
+      }
       card.innerHTML = `<div class="slot-top"><strong>${court.name}</strong><span class="slot-icon" aria-hidden="true">${status === 'available' ? '&#8599;' : status === 'locked' ? '&#9707;' : '&#8212;'}</span></div><span class="slot-type">${rule.label} <span>· 60 min</span></span><div class="slot-status"><i class="dot ${status}-dot"></i>${!slot.available ? 'Unavailable' : rule.eligible ? 'Available' : rule.reason}</div>`;
       cards.append(card);
     }

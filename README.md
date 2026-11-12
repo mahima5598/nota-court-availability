@@ -1,6 +1,7 @@
-# Nota Club availability
+# North York Winter Tennis Club – court availability
 
-A responsive, availability-only prototype for non-members. Uses plainly labeled,
+A responsive court availability and booking prototype for non-members, styled
+to match the North York Winter Tennis Club website. Uses plainly labeled,
 deterministic sample data: four illustrative courts, hourly sessions from 8 am to
 11 pm. These are not confirmed club courts, hours, or live availability.
 
@@ -40,6 +41,21 @@ in `app.js` and `index.html` together. Handle failures visibly; never substitute
 sample data for a failed live request. Confirm real hours, courts, session
 lengths, refresh limits, and booking-window opening times with Chelsea.
 
-Rates, reservations, authentication, deployment, and actual Chelsea integration
-are intentionally not included. Availability does not guarantee a reservation;
+## Booking
+
+Selecting an available court opens `/book`, which collects name, email, and
+phone and posts to `POST /api/bookings`. The server re-validates the details and
+rechecks that the court is still available and inside the non-member window,
+then calls `createChelseaBooking` in `chelsea.js`.
+
+That adapter is not connected yet, so every valid submission returns a clear
+"booking was not made" message (HTTP 503). No booking is confirmed until
+Chelsea returns a booking reference.
+
+Payment is not implemented. Card details must never be collected on this site;
+use a hosted payment provider (to be chosen). Charge or authorize payment before
+calling Chelsea, and refund or void it if the Chelsea booking fails.
+
+Rates, authentication, deployment, and actual Chelsea integration are not
+included yet. Availability does not guarantee a reservation;
 any future booking endpoint must independently recheck eligibility and inventory.
