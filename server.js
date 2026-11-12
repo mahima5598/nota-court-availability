@@ -16,6 +16,8 @@ const files = {
   '/availability.js': ['availability.js', 'text/javascript; charset=utf-8'],
   '/data.js': ['data.js', 'text/javascript; charset=utf-8'],
   '/logo.png': ['logo.png', 'image/png'],
+  '/club-icon.png': ['club-icon.png', 'image/png'],
+  '/club-icon.ico': ['club-icon.ico', 'image/x-icon'],
 };
 
 function sendJson(response, status, body) {
