@@ -1,11 +1,18 @@
 // Replace this provider with a server-backed Chelsea adapter when API access is available.
 // Never put Chelsea credentials in browser code.
-export const courts = [
-  { id: 'court-1', name: 'Court 1' },
-  { id: 'court-2', name: 'Court 2' },
-  { id: 'court-3', name: 'Court 3' },
-  { id: 'court-4', name: 'Court 4' },
+export const locations = [
+  { id: 'north', name: 'North Bubble', courtCount: 4 },
+  { id: 'south', name: 'South Bubble', courtCount: 6 },
+  { id: 'east', name: 'East Bubble', courtCount: 4 },
 ];
+
+export const courts = locations.flatMap((location) =>
+  Array.from({ length: location.courtCount }, (_, index) => ({
+    id: `${location.id}-court-${index + 1}`,
+    name: `Court ${index + 1}`,
+    locationId: location.id,
+    locationName: location.name,
+  })));
 
 export async function getAvailability(date) {
   const seed = Number(date.replaceAll('-', ''));
@@ -14,7 +21,7 @@ export async function getAvailability(date) {
     for (const [index, court] of courts.entries()) {
       slots.push({
         id: `${date}-${court.id}-${hour}`,
-        date, courtId: court.id, start: hour * 60, end: (hour + 1) * 60,
+        date, courtId: court.id, locationId: court.locationId, start: hour * 60, end: (hour + 1) * 60,
         available: (seed + hour * 7 + index * 3) % 5 > 1,
       });
     }

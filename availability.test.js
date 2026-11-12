@@ -56,6 +56,29 @@ test('calendar arithmetic remains stable across DST and year boundaries', () => 
 });
 
 import { validateBooking } from './booking.js';
+import { courts, locations, getAvailability } from './data.js';
+
+test('locations have distinct courts and sample slots preserve location identity', async () => {
+  const { slots } = await getAvailability('2026-11-09');
+  assert.equal(new Set(courts.map((court) => court.id)).size, 14);
+  for (const [locationId, count] of [['north', 4], ['south', 6], ['east', 4]]) {
+    const locationCourts = courts.filter((court) => court.locationId === locationId);
+    assert.equal(locationCourts.length, count);
+    assert.deepEqual(locationCourts.map((court) => court.name),
+      Array.from({ length: count }, (_, index) => `Court ${index + 1}`));
+    const locationSlots = slots.filter((item) => item.locationId === locationId);
+    assert.equal(locationSlots.length, count * 15);
+    assert.ok(locationSlots.every((item) => locationCourts.some((court) => court.id === item.courtId)));
+    assert.ok(locations.some((location) => location.id === locationId));
+  }
+  const input = { name: 'Alex Player', email: 'alex@example.com', phone: '4165550123', date: '2026-11-09', start: 600 };
+  for (const location of locations) {
+    const available = slots.find((item) => item.locationId === location.id && item.start === 600 && item.available);
+    const result = validateBooking({ ...input, courtId: available.courtId }, slots, monday);
+    assert.deepEqual(result.errors, {});
+    assert.equal(result.slot.locationId, location.id);
+  }
+});
 
 const bookingSlots = [
   { date: '2026-11-09', courtId: 'court-1', start: 600, end: 660, available: true },

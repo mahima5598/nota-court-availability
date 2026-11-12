@@ -1,5 +1,5 @@
 import { addDays, clubClock, dateLabel, eligibility, timeLabel } from './availability.js';
-import { courts, getAvailability } from './data.js';
+import { courts, locations, getAvailability } from './data.js';
 
 const $ = (selector) => document.querySelector(selector);
 let today = clubClock().date;
@@ -8,8 +8,8 @@ let slots = [];
 let requestId = 0;
 let loadError = false;
 
-for (const court of courts) {
-  $('#court-filter').add(new Option(court.name, court.id));
+for (const location of locations) {
+  $('#location-filter').add(new Option(`${location.name} (Courts 1–${location.courtCount})`, location.id));
 }
 
 function renderDates() {
@@ -30,11 +30,11 @@ function renderDates() {
 function renderResults() {
   if (loadError) return;
   const now = new Date();
-  const courtFilter = $('#court-filter').value;
+  const locationFilter = $('#location-filter').value;
   const timeFilter = $('#time-filter').value;
   const eligibleOnly = $('#eligible-filter').checked;
   const filtered = slots.filter((slot) =>
-    (courtFilter === 'all' || slot.courtId === courtFilter) &&
+    (locationFilter === 'all' || slot.locationId === locationFilter) &&
     (timeFilter === 'all' || (timeFilter === 'morning' && slot.start < 720) ||
       (timeFilter === 'afternoon' && slot.start >= 720 && slot.start < 1080) ||
       (timeFilter === 'evening' && slot.start >= 1080)) &&
@@ -47,7 +47,7 @@ function renderResults() {
   if (!filtered.length) {
     const empty = document.createElement('div');
     empty.className = 'empty-state';
-    empty.innerHTML = `<span aria-hidden="true">&#9684;</span><h4>No matching sample slots</h4><p>${eligibleOnly ? 'Try another date or filter, or turn off “Available to me only” to see booking windows.' : 'Try a different court or time of day.'}</p>`;
+    empty.innerHTML = `<span aria-hidden="true">&#9684;</span><h4>No matching sample slots</h4><p>${eligibleOnly ? 'Try another date or filter, or turn off “Show only courts I can book” to see booking windows.' : 'Try a different location or time of day.'}</p>`;
     results.append(empty);
     return;
   }
@@ -68,10 +68,14 @@ function renderResults() {
       const card = document.createElement(status === 'available' ? 'a' : 'article');
       card.className = `slot-card ${status}`;
       if (status === 'available') {
-        card.href = `/book?${new URLSearchParams({ date: slot.date, court: slot.courtId, start: slot.start })}`;
-        card.setAttribute('aria-label', `Book ${court.name} at ${timeLabel(slot.start)}`);
+        card.href = `./book.html?${new URLSearchParams({ date: slot.date, court: slot.courtId, start: slot.start })}`;
+        card.setAttribute('aria-label', `Book ${court.locationName}, ${court.name} at ${timeLabel(slot.start)}`);
       }
       card.innerHTML = `<div class="slot-top"><strong>${court.name}</strong><span class="slot-icon" aria-hidden="true">${status === 'available' ? '&#8599;' : status === 'locked' ? '&#9707;' : '&#8212;'}</span></div><span class="slot-type">${rule.label} <span>· 60 min</span></span><div class="slot-status"><i class="dot ${status}-dot"></i>${!slot.available ? 'Unavailable' : rule.eligible ? 'Available' : rule.reason}</div>`;
+      const locationLabel = document.createElement('span');
+      locationLabel.className = 'slot-location';
+      locationLabel.textContent = court.locationName;
+      card.prepend(locationLabel);
       cards.append(card);
     }
     row.append(cards);
@@ -121,7 +125,7 @@ function tick() {
   }
 }
 
-for (const selector of ['#court-filter', '#time-filter', '#eligible-filter']) {
+for (const selector of ['#location-filter', '#time-filter', '#eligible-filter']) {
   $(selector).addEventListener('change', renderResults);
 }
 $('#refresh').addEventListener('click', loadSlots);

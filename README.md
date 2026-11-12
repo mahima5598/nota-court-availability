@@ -1,9 +1,35 @@
-# North York Winter Tennis Club – court availability
+# Public/Non-Member Court Availability
+
+[Open the website](https://mahima5598.github.io/nota-court-availability/)
+
+The link above works **after GitHub Pages is enabled** using the steps below.
+
+## Free hosting and sharing with GitHub Pages
+
+This session cannot change repository visibility or GitHub Pages settings.
+Complete these steps on GitHub:
+
+1. In this repository, open **Settings > General > Danger Zone > Change repository visibility** and make it **Public**. This publishes all source code and commit history; do not add secrets or customer data.
+2. Open **Settings > Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Choose branch **main** and folder **/ (root)**, then **Save**.
+5. Wait for the Pages deployment to finish (check the **Actions** tab), then open the website link above and share it.
+
+Subsequent pushes to `main` update the shared site automatically. GitHub Pages
+hosts static files for free for public repositories; it does not run `npm start`,
+`server.js`, or a booking API. This hosted site is a clearly marked preview:
+sample availability and fictional form submissions only. The demo validates
+details locally without sending or storing them. A backend host will be needed
+for real Chelsea integration and payments; never put credentials in the
+repository or browser files.
 
 A responsive court availability and booking prototype for non-members, styled
 to match the North York Winter Tennis Club website. Uses plainly labeled,
-deterministic sample data: four illustrative courts, hourly sessions from 8 am to
-11 pm. These are not confirmed club courts, hours, or live availability.
+deterministic sample availability, hourly sessions from 8 am to 11 pm.
+Locations: North Bubble (Courts 1-4), South Bubble (Courts 1-6), and East Bubble
+(Courts 1-4). Each court has a location-specific ID so court numbers cannot be
+confused between locations. Hours are illustrative, not confirmed live data.
+The browser title and favicon use the public/non-member name and club logo.
 
 ## Run
 
@@ -43,12 +69,16 @@ lengths, refresh limits, and booking-window opening times with Chelsea.
 
 ## Booking
 
-Selecting an available court opens `/book`, which collects name, email, and
-phone and posts to `POST /api/bookings`. The server re-validates the details and
+Selecting an available court opens `book.html`, showing the location, court,
+date, and time. The demo form validates fictional name, email, and phone locally
+and explicitly reports that no booking was made. It never submits sample
+details to a server, including on GitHub Pages.
+
+The local server retains `POST /api/bookings` for future integration. It re-validates the details and
 rechecks that the court is still available and inside the non-member window,
 then calls `createChelseaBooking` in `chelsea.js`.
 
-That adapter is not connected yet, so every valid submission returns a clear
+That adapter is not connected yet, so every valid direct API request returns a clear
 "booking was not made" message (HTTP 503). No booking is confirmed until
 Chelsea returns a booking reference.
 

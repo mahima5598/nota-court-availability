@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#1d4a81">
     <meta name="description" content="Court availability for non-members at North York Winter Tennis Club, Toronto.">
-    <title>Court Availability | North York Winter Tennis Club</title>
-    <link rel="icon" href="/logo.png">
-    <link rel="stylesheet" href="/styles.css">
-    <script type="module" src="/app.js"></script>
+    <title>Public/Non-Member Court Availability | North York Winter Tennis Club</title>
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="apple-touch-icon" href="./logo.png">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./app.js"></script>
   </head>
   <body>
     <div class="top-bar">
@@ -20,10 +21,10 @@
 
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href="https://www.nywintertennisclub.com"><img src="/logo.png" alt="North York Winter Tennis Club" width="91" height="80"></a>
+        <a class="logo" href="https://www.nywintertennisclub.com"><img src="./logo.png" alt="North York Winter Tennis Club" width="91" height="80"></a>
         <nav aria-label="Main">
           <a href="https://www.nywintertennisclub.com">Club <span aria-hidden="true">&#8964;</span></a>
-          <a class="active" href="#availability" aria-current="page">Court Availability</a>
+          <a class="active" href="#availability" aria-current="page">Public/Non-Member Court Availability</a>
           <a href="https://www.nywintertennisclub.com">Join the Waitlist</a>
         </nav>
       </div>
@@ -31,7 +32,7 @@
 
     <section class="page-title" aria-labelledby="page-title">
       <div class="container">
-        <h1 id="page-title">Court Availability</h1>
+        <h1 id="page-title">Public/Non-Member Court Availability</h1>
         <p>Open courts for non-members &middot; All times in Toronto local time</p>
       </div>
     </section>
@@ -53,7 +54,7 @@
 
     <main class="content">
       <div class="container">
-        <p class="notice"><strong>Preview:</strong> showing sample availability, not live club data. Court names and hours are illustrative. Bookings can’t be completed until the club’s Chelsea system is connected.</p>
+        <p class="notice"><strong>Preview:</strong> showing sample availability, not live club data. Court hours are illustrative. Bookings can’t be completed until the club’s Chelsea system is connected.</p>
 
         <section id="availability" class="panel" aria-labelledby="availability-title">
           <div class="panel-header">
@@ -65,7 +66,7 @@
           <div id="dates" class="dates" role="group" aria-label="Choose a date"></div>
 
           <div class="filters">
-            <label>Court<select id="court-filter"><option value="all">All courts</option></select></label>
+            <label>Location<select id="location-filter"><option value="all">All locations</option></select></label>
             <label>Time of day<select id="time-filter"><option value="all">Any time</option><option value="morning">Morning (before noon)</option><option value="afternoon">Afternoon (noon–6 pm)</option><option value="evening">Evening (from 6 pm)</option></select></label>
             <label class="checkbox"><input id="eligible-filter" type="checkbox" checked> Show only courts I can book</label>
           </div>
@@ -76,14 +77,14 @@
           </div>
           <div class="legend"><span><i class="dot available-dot"></i>Available to non-members</span><span><i class="dot locked-dot"></i>Outside booking window</span><span><i class="dot reserved-dot"></i>Unavailable</span></div>
           <div id="results" class="results" aria-busy="false"></div>
-          <p class="footnote">Select an available court to book it. Rates will be added later.</p>
+          <p class="footnote">Select an available court to preview the booking form. Rates will be added later.</p>
         </section>
       </div>
     </main>
 
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div><img src="/logo.png" alt="" width="91" height="80"><p>North York Winter Tennis.</p></div>
+        <div><img src="./logo.png" alt="" width="91" height="80"><p>North York Winter Tennis.</p></div>
         <div><h2>Useful Links</h2><ul><li><a href="https://www.nywintertennisclub.com">North Bubble - Head Office</a></li><li><a href="https://www.nywintertennisclub.com">South Bubble</a></li><li><a href="https://www.nywintertennisclub.com">East Bubble</a></li><li><a href="https://www.nywintertennisclub.com">Club Calendar</a></li></ul></div>
         <div><h2>Club Hours</h2><p>North Bubble 2975 Don Mills Rd West<br>7am to midnight 7 days a week.</p><p>East Bubble 230 Cassandra Blvd<br>7am to 11pm 7 days a week.</p></div>
         <div><h2>Contact Us</h2><address>P.O. Box 896 Station B<br>Willowdale, Ontario<br>M2K 2R1<br>Phone: <a href="tel:+14164960225">(416) 496-0225</a><br>Email: <a class="red-link" href="mailto:membership@nywintertennisclub.com">membership@nywintertennisclub.com</a></address></div>
