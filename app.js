@@ -9,7 +9,7 @@ let requestId = 0;
 let loadError = false;
 
 for (const location of locations) {
-  $('#location-filter').add(new Option(`${location.name} (Courts 1–${location.courtCount})`, location.id));
+  $('#location-filter').add(new Option(`${location.name} (Courts ${location.firstCourt}–${location.firstCourt + location.courtCount - 1})`, location.id));
 }
 
 function renderDates() {

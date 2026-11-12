@@ -61,11 +61,13 @@ import { courts, locations, getAvailability } from './data.js';
 test('locations have distinct courts and sample slots preserve location identity', async () => {
   const { slots } = await getAvailability('2026-11-09');
   assert.equal(new Set(courts.map((court) => court.id)).size, 14);
-  for (const [locationId, count] of [['north', 4], ['south', 6], ['east', 4]]) {
+  for (const [locationId, first, count] of [['north', 1, 4], ['south', 5, 6], ['east', 11, 4]]) {
     const locationCourts = courts.filter((court) => court.locationId === locationId);
     assert.equal(locationCourts.length, count);
     assert.deepEqual(locationCourts.map((court) => court.name),
-      Array.from({ length: count }, (_, index) => `Court ${index + 1}`));
+      Array.from({ length: count }, (_, index) => `Court ${first + index}`));
+    assert.deepEqual(locationCourts.map((court) => court.id),
+      Array.from({ length: count }, (_, index) => `${locationId}-court-${first + index}`));
     const locationSlots = slots.filter((item) => item.locationId === locationId);
     assert.equal(locationSlots.length, count * 15);
     assert.ok(locationSlots.every((item) => locationCourts.some((court) => court.id === item.courtId)));

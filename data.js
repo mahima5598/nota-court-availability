@@ -1,15 +1,15 @@
 // Replace this provider with a server-backed Chelsea adapter when API access is available.
 // Never put Chelsea credentials in browser code.
 export const locations = [
-  { id: 'north', name: 'North Bubble', courtCount: 4 },
-  { id: 'south', name: 'South Bubble', courtCount: 6 },
-  { id: 'east', name: 'East Bubble', courtCount: 4 },
+  { id: 'north', name: 'North Bubble', firstCourt: 1, courtCount: 4 },
+  { id: 'south', name: 'South Bubble', firstCourt: 5, courtCount: 6 },
+  { id: 'east', name: 'East Bubble', firstCourt: 11, courtCount: 4 },
 ];
 
 export const courts = locations.flatMap((location) =>
   Array.from({ length: location.courtCount }, (_, index) => ({
-    id: `${location.id}-court-${index + 1}`,
-    name: `Court ${index + 1}`,
+    id: `${location.id}-court-${location.firstCourt + index}`,
+    name: `Court ${location.firstCourt + index}`,
     locationId: location.id,
     locationName: location.name,
   })));

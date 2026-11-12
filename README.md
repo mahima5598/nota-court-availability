@@ -26,8 +26,8 @@ repository or browser files.
 A responsive court availability and booking prototype for non-members, styled
 to match the North York Winter Tennis Club website. Uses plainly labeled,
 deterministic sample availability, hourly sessions from 8 am to 11 pm.
-Locations: North Bubble (Courts 1-4), South Bubble (Courts 1-6), and East Bubble
-(Courts 1-4). Each court has a location-specific ID so court numbers cannot be
+Locations: North Bubble (Courts 1-4), South Bubble (Courts 5-10), and East Bubble
+(Courts 11-14). Each court has a location-specific ID so court numbers cannot be
 confused between locations. Hours are illustrative, not confirmed live data.
 The browser title and favicon use the public/non-member name and club logo.
 
